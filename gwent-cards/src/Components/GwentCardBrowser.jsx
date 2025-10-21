@@ -30,3 +30,7 @@ const fetchCards = async () => {
     setLoading(false);
   }
 };
+
+const filteredCards = cards.filter((card) => {
+  const matchesSearch = card.name?.en?.toLowerCase().includes;
+});
