@@ -8,3 +8,25 @@ const GwentCardBrowser = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFaction, setSelectedFaction] = useState("all");
 };
+
+useEffect(() => {
+  fetchCards();
+}, []);
+
+const fetchCards = async () => {
+  try {
+    setLoading(true);
+
+    const response = await fetch("https://api.gwent.one/?key=data");
+    const data = await response.json();
+
+    const cardsArray = Object.values(data);
+    setCards(cardsArray);
+    setError(null);
+  } catch (err) {
+    setError("Failed to load cards. Please try again");
+    console.error("Error fetching cards:", err);
+  } finally {
+    setLoading(false);
+  }
+};
